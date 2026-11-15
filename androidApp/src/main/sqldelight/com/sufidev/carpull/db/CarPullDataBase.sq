@@ -1,0 +1,79 @@
+-- User table and queries
+CREATE TABLE UserEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+insertUser:
+INSERT INTO UserEntity(id, name)
+VALUES (?, ?);
+
+selectUserById:
+SELECT * FROM UserEntity
+WHERE id = ?;
+
+selectAllUsers:
+SELECT * FROM UserEntity
+ORDER BY name;
+
+updateUser:
+UPDATE UserEntity
+SET name = ?
+WHERE id = ?;
+
+deleteUser:
+DELETE FROM UserEntity
+WHERE id = ?;
+
+-- Trip table and queries
+CREATE TABLE TripEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    tripStart TEXT NOT NULL,
+    tripEnd TEXT NOT NULL,
+    tripDriver INTEGER NOT NULL REFERENCES UserEntity(id),
+    tripStatus TEXT NOT NULL
+);
+
+insertTrip:
+INSERT INTO TripEntity(id, name, tripStart, tripEnd, tripDriver, tripStatus)
+VALUES (?, ?, ?, ?, ?, ?);
+
+selectTripById:
+SELECT * FROM TripEntity
+WHERE id = ?;
+
+selectAllTrips:
+SELECT * FROM TripEntity
+ORDER BY tripStart;
+
+updateTrip:
+UPDATE TripEntity
+SET name = ?, tripStart = ?, tripEnd = ?, tripDriver = ?, tripStatus = ?
+WHERE id = ?;
+
+deleteTrip:
+DELETE FROM TripEntity
+WHERE id = ?;
+
+-- Trip passenger table and queries
+CREATE TABLE TripPassenger (
+    tripId INTEGER NOT NULL REFERENCES TripEntity(id) ON DELETE CASCADE,
+    userId INTEGER NOT NULL REFERENCES UserEntity(id) ON DELETE CASCADE,
+    PRIMARY KEY (tripId, userId)
+);
+
+addTripPassenger:
+INSERT OR IGNORE INTO TripPassenger(tripId, userId)
+VALUES (?, ?);
+
+removeTripPassenger:
+DELETE FROM TripPassenger
+WHERE tripId = ? AND userId = ?;
+
+selectPassengersForTrip:
+SELECT UserEntity.*
+FROM UserEntity
+INNER JOIN TripPassenger ON UserEntity.id = TripPassenger.userId
+WHERE TripPassenger.tripId = ?
+ORDER BY UserEntity.name;

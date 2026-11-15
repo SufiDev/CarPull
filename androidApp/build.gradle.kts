@@ -65,3 +65,11 @@ android {
         compose = true
     }
 }
+
+sqldelight {
+    databases {
+        create("CarPullDatabase") {
+            packageName = "com.sufidev.carpull.db"
+        }
+    }
+}
