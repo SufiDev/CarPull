@@ -1,65 +1,65 @@
 -- User table and queries
-CREATE TABLE UserEntity (
+CREATE TABLE User (
     id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL
 );
 
 insertUser:
-INSERT INTO UserEntity(id, name)
+INSERT INTO User(id, name)
 VALUES (?, ?);
 
 selectUserById:
-SELECT * FROM UserEntity
+SELECT * FROM User
 WHERE id = ?;
 
 selectAllUsers:
-SELECT * FROM UserEntity
+SELECT * FROM User
 ORDER BY name;
 
 updateUser:
-UPDATE UserEntity
+UPDATE User
 SET name = ?
 WHERE id = ?;
 
 deleteUser:
-DELETE FROM UserEntity
+DELETE FROM User
 WHERE id = ?;
 
 -- Trip table and queries
-CREATE TABLE TripEntity (
+CREATE TABLE Trip (
     id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
     tripStart TEXT NOT NULL,
     tripEnd TEXT NOT NULL,
-    tripDriver INTEGER NOT NULL REFERENCES UserEntity(id),
+    tripDriverId INTEGER NOT NULL REFERENCES User(id),
     tripStatus TEXT NOT NULL
 );
 
 insertTrip:
-INSERT INTO TripEntity(id, name, tripStart, tripEnd, tripDriver, tripStatus)
+INSERT INTO Trip(id, name, tripStart, tripEnd, tripDriverId, tripStatus)
 VALUES (?, ?, ?, ?, ?, ?);
 
 selectTripById:
-SELECT * FROM TripEntity
+SELECT * FROM Trip
 WHERE id = ?;
 
 selectAllTrips:
-SELECT * FROM TripEntity
+SELECT * FROM Trip
 ORDER BY tripStart;
 
 updateTrip:
-UPDATE TripEntity
-SET name = ?, tripStart = ?, tripEnd = ?, tripDriver = ?, tripStatus = ?
+UPDATE Trip
+SET name = ?, tripStart = ?, tripEnd = ?, tripDriverId = ?, tripStatus = ?
 WHERE id = ?;
 
 deleteTrip:
-DELETE FROM TripEntity
+DELETE FROM Trip
 WHERE id = ?;
 
 -- Trip passenger table and queries
 CREATE TABLE TripPassenger (
-    tripId INTEGER NOT NULL REFERENCES TripEntity(id) ON DELETE CASCADE,
-    userId INTEGER NOT NULL REFERENCES UserEntity(id) ON DELETE CASCADE,
+    tripId INTEGER NOT NULL REFERENCES Trip(id) ON DELETE CASCADE,
+    userId INTEGER NOT NULL REFERENCES User(id) ON DELETE CASCADE,
     PRIMARY KEY (tripId, userId)
 );
 
@@ -72,8 +72,8 @@ DELETE FROM TripPassenger
 WHERE tripId = ? AND userId = ?;
 
 selectPassengersForTrip:
-SELECT UserEntity.*
-FROM UserEntity
-INNER JOIN TripPassenger ON UserEntity.id = TripPassenger.userId
+SELECT User.*
+FROM User
+INNER JOIN TripPassenger ON User.id = TripPassenger.userId
 WHERE TripPassenger.tripId = ?
-ORDER BY UserEntity.name;
+ORDER BY User.name;

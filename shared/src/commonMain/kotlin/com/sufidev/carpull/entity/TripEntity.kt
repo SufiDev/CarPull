@@ -13,8 +13,8 @@ data class TripEntity(
     val tripStart: String,
     @SerialName("tripEnd")
     val tripEnd: String,
-    @SerialName("tripDriver")
-    val tripDriver: UserEntity,
+    @SerialName("tripDriverId")
+    val tripDriverId: String,
     @SerialName("passengerList")
     val passengerList: List<UserEntity>,
     @SerialName("tripStatus")
