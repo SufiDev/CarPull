@@ -82,6 +82,7 @@ kotlin {
         jsMain.dependencies {
             implementation(libs.wrappers.browser)
             implementation(libs.ktor.client.js)
+            implementation(libs.sqldelight.webworker.driver)
             implementation(npm("@cashapp/sqldelight-sqljs-worker", libs.versions.sqlDelight.get()))
             implementation(npm("sql.js", libs.versions.sqlJs.get()))
         }
