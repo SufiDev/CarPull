@@ -3,8 +3,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -19,17 +17,6 @@ dependencies {
 
     implementation(libs.compose.uiToolingPreview)
     debugImplementation(libs.compose.uiTooling)
-
-    implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-    implementation(libs.sqldelight.runtime)
-    implementation(libs.kotlinx.datetime)
-    implementation(libs.koin.core)
-
-    implementation(libs.ktor.client.android)
-    implementation(libs.sqldelight.android.driver)
 }
 
 android {
@@ -63,13 +50,5 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-}
-
-sqldelight {
-    databases {
-        create("CarPullDatabase") {
-            packageName = "com.sufidev.carpull.db"
-        }
     }
 }
