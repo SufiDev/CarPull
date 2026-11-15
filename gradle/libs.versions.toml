@@ -19,7 +19,10 @@ coroutinesVersion = "1.11.0"
 dateTimeVersion = "0.8.0"
 koin = "4.2.2"
 ktor = "3.6.1"
+# Also used in sqldelight-sqljs-worker npm package version
 sqlDelight = "2.4.1"
+# SQL.js npm package version
+sqlJs = "1.8.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

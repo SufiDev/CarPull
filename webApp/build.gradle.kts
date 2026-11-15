@@ -24,5 +24,8 @@ kotlin {
 
             implementation(libs.compose.ui)
         }
+        jsMain.dependencies {
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
+        }
     }
 }

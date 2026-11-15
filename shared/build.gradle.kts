@@ -82,6 +82,8 @@ kotlin {
         jsMain.dependencies {
             implementation(libs.wrappers.browser)
             implementation(libs.ktor.client.js)
+            implementation(npm("@cashapp/sqldelight-sqljs-worker", libs.versions.sqlDelight.get()))
+            implementation(npm("sql.js", libs.versions.sqlJs.get()))
         }
         getByName("androidDeviceTest").dependencies {
             implementation(libs.androidx.testRunner)
@@ -96,7 +98,8 @@ dependencies {
 sqldelight {
     databases {
         create("CarPullDatabase") {
-            packageName = "com.sufidev.carpull.db"
+            packageName.set("com.sufidev.carpull.db")
+            generateAsync.set(true)
         }
     }
 }
