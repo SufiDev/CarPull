@@ -1,0 +1,34 @@
+{
+  "trips": [
+    {
+      "id": 1,
+      "name": "Morning commute",
+      "tripStart": "2026-11-17T08:00:00Z",
+      "tripEnd": "2026-11-17T08:30:00Z",
+      "tripDriverId": 1,
+      "passengerList": [
+        { "id": 3, "name": "Alex Morgan" },
+        { "id": 4, "name": "Sam Rivera" }
+      ],
+      "tripStatus": "scheduled"
+    },
+    {
+      "id": 2,
+      "name": "Evening ride",
+      "tripStart": "2026-11-17T17:00:00Z",
+      "tripEnd": "2026-11-17T17:45:00Z",
+      "tripDriverId": 2,
+      "passengerList": [
+        { "id": 5, "name": "Jamie Chen" }
+      ],
+      "tripStatus": "scheduled"
+    }
+  ],
+  "users": [
+    { "id": 1, "name": "Taylor Brooks" },
+    { "id": 2, "name": "Jordan Lee" },
+    { "id": 3, "name": "Alex Morgan" },
+    { "id": 4, "name": "Sam Rivera" },
+    { "id": 5, "name": "Jamie Chen" }
+  ]
+}
