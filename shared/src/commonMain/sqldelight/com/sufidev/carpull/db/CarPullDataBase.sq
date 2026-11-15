@@ -56,6 +56,9 @@ deleteTrip:
 DELETE FROM Trip
 WHERE id = ?;
 
+removeAllTrips:
+DELETE FROM Trip;
+
 -- Trip passenger table and queries
 CREATE TABLE TripPassenger (
     tripId INTEGER NOT NULL REFERENCES Trip(id) ON DELETE CASCADE,
