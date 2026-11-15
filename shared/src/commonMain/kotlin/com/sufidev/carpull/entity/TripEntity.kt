@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TripEntity(
     @SerialName("id")
-    val id: Int,
+    val id: Long,
     @SerialName("name")
     val name: String,
     @SerialName("tripStart")
@@ -14,7 +14,7 @@ data class TripEntity(
     @SerialName("tripEnd")
     val tripEnd: String,
     @SerialName("tripDriverId")
-    val tripDriverId: String,
+    val tripDriverId: Long,
     @SerialName("passengerList")
     val passengerList: List<UserEntity>,
     @SerialName("tripStatus")
