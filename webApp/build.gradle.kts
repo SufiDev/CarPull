@@ -23,6 +23,7 @@ kotlin {
             implementation(project(":shared"))
 
             implementation(libs.compose.ui)
+            implementation(libs.kotlinx.coroutines.core)
         }
         jsMain.dependencies {
             implementation(devNpm("copy-webpack-plugin", "9.1.0"))
