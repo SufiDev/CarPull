@@ -8,7 +8,9 @@ import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-class CarPullApi {
+class CarPullApi(
+    private val baseUrl: String = "http://localhost:3030"
+) {
     private val httpClient = HttpClient {
         install(ContentNegotiation) {
             json(Json {
@@ -19,6 +21,6 @@ class CarPullApi {
     }
 
     suspend fun getAllTrips(): List<TripEntity> {
-        return httpClient.get("http://10.0.2.2:3030/trips").body()
+        return httpClient.get("$baseUrl/trips").body()
     }
 }

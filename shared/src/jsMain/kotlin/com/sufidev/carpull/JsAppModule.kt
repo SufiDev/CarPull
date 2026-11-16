@@ -19,7 +19,7 @@ suspend fun initializeJsDependencies() {
         }.koin
 
     if (koin.getOrNull<CarPullSDK>() == null) {
-        val api = CarPullApi()
+        val api = CarPullApi(baseUrl = "http://localhost:3030")
         val sdk = CarPullSDK.create(
             databaseDriverFactory = koin.get<DatabaseDriverFactory>(),
             api = api,

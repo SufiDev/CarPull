@@ -22,7 +22,7 @@ suspend fun initializeAndroidDependencies(context: Context) {
         }.koin
 
     if (koin.getOrNull<CarPullSDK>() == null) {
-        val api = CarPullApi()
+        val api = CarPullApi(baseUrl = "http://10.0.2.2:3030")
         val sdk = CarPullSDK.create(
             databaseDriverFactory = koin.get<DatabaseDriverFactory>(),
             api = api,

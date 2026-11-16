@@ -1,5 +1,6 @@
 package com.sufidev.carpull.cache
 
+import app.cash.sqldelight.async.coroutines.awaitAsList
 import app.cash.sqldelight.db.SqlDriver
 import com.sufidev.carpull.db.CarPullDatabase
 import com.sufidev.carpull.entity.TripEntity
@@ -14,21 +15,19 @@ internal class Database private constructor(driver: SqlDriver) {
             Database(factory.createDriver())
     }
 
-    internal fun getAllTrips(): List<TripEntity> {
-        return dbQuery.selectAllTrips(::mapTripSelecting)
-            .executeAsList()
-            .map { trip ->
-                trip.copy(
-                    passengerList = dbQuery.selectPassengersForTrip(trip.id)
-                        .executeAsList()
-                        .map { passenger ->
-                            UserEntity(
-                                id = passenger.id.toInt(),
-                                name = passenger.name
-                            )
-                        }
-                )
-            }
+    internal suspend fun getAllTrips(): List<TripEntity> {
+        val trips = dbQuery.selectAllTrips(::mapTripSelecting).awaitAsList()
+        return trips.map { trip ->
+            val passengers = dbQuery.selectPassengersForTrip(trip.id).awaitAsList()
+            trip.copy(
+                passengerList = passengers.map { passenger ->
+                    UserEntity(
+                        id = passenger.id.toInt(),
+                        name = passenger.name
+                    )
+                }
+            )
+        }
     }
 
     private fun mapTripSelecting(
