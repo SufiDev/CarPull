@@ -3,8 +3,8 @@
     {
       "id": 1,
       "name": "Morning commute",
-      "tripStart": "2026-11-17T08:00:00Z",
-      "tripEnd": "2026-11-17T08:30:00Z",
+      "tripStart": "today at 08:00",
+      "tripEnd": "today at 08:30",
       "tripDriverId": 1,
       "passengerList": [
         { "id": 3, "name": "Alex Morgan" },
@@ -15,8 +15,8 @@
     {
       "id": 2,
       "name": "Evening ride",
-      "tripStart": "2026-11-17T17:00:00Z",
-      "tripEnd": "2026-11-17T17:45:00Z",
+      "tripStart": "today at 17:00",
+      "tripEnd": "today at 17:45",
       "tripDriverId": 2,
       "passengerList": [
         { "id": 5, "name": "Jamie Chen" }
